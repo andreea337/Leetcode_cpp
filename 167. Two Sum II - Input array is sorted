@@ -1,0 +1,54 @@
+第一次嘗試解法:(超直觀解法)
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& numbers, int target) {
+        vector<int> v;
+        for(int i=0; i<numbers.size()-1; i++){
+            for(int j=i+1; j<numbers.size(); j++){
+                int add = numbers[i] + numbers[j];
+                if(add == target){
+                    v.push_back(i+1);
+                    v.push_back(j+1);
+                    return v;
+                }
+            }
+        }
+        return v;
+    }
+};
+time complexity: O((numbers.size()-1)!)
+=> TLE
+
+---
+
+第二次解法:
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& numbers, int target) {
+        int left = 0;
+        int right = numbers.size()-1;
+        vector<int> v;
+        
+        while(left < right){
+            int add = numbers[left] + numbers[right];
+            if(add == target){
+                v.push_back(left+1);
+                v.push_back(right+1);
+                return v;
+            }
+            else if(add < target){
+                left++;
+            }
+            else{
+                right--;
+            }
+        }
+        return v;
+    }
+};
+左右各設一個指標，當合起來的數字>target時right- -，右邊指標往回走(數字變小，因為這個是increasing order)，反之，當合起來的數字<target時left++，左邊指標往尾巴走，代表下一回合的數字總合會變大。
+
+---
+
+Runtime: 4 ms, faster than 88.64% of C++ online submissions for Two Sum II - Input array is sorted.
+Memory Usage: 9.5 MB, less than 74.54% of C++ online submissions for Two Sum II - Input array is sorted.
