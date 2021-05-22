@@ -1,0 +1,26 @@
+
+class Solution {
+public:
+    string convertToTitle(int columnNumber) {
+        string s;
+        int val = 0;
+        
+        while(columnNumber > 0){
+            val = columnNumber%26;
+            if(val == 0){
+                val = 26;
+            }
+            s += (val + 64);
+            columnNumber -= val;
+            columnNumber /= 26;
+        }
+        reverse(s.begin(), s.end());
+        return s;
+    }
+};
+最後一個字是由number%26決定，/26則是往前移動一位的意思
+
+---
+
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Excel Sheet Column Title.
+Memory Usage: 5.8 MB, less than 59.63% of C++ online submissions for Excel Sheet Column Title.
